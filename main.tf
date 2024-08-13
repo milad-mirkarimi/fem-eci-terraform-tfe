@@ -17,10 +17,10 @@ module "workspace" {
   organization_name = var.organization_name
   execution_mode    = each.value.execution_mode
   project_id        = each.value.project_id
-}
 
-moved {
-  from = module.workspace["fem-eci-workspace"]
-  to   = module.workspace["fem-eci-tfe"]
+  vcs_repo = {
+    github_app_installation_id = data.tfe_github_app_installation.this.id
+    identifier = each.value.vcs_repo_identifier
+  }
 }
 
